@@ -26,6 +26,5 @@ RUN a2enmod rewrite
 COPY config_files/php.ini /usr/local/etc/php/
 
 VOLUME /var/www/html/
-
-COPY config_files/docker_run.sh /tmp/
-CMD ["/tmp/docker_run.sh"]
+EXPOSE 80
+CMD ["apache2-foreground"]
