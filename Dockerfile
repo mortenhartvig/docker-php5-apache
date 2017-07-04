@@ -12,7 +12,7 @@ RUN apt-get update \
 		libfreetype6-dev \
 		libxml2-dev \
 		libicu-dev \
-		mysqli-client \
+		mysql-client \
 		wget \
 		unzip \
     && rm -rf /var/lib/apt/lists/* \
