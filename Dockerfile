@@ -19,7 +19,7 @@ RUN apt-get update \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install iconv intl mcrypt opcache pdo mysqli pdo_mysql mbstring soap gd zip
 
-RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/ssl-cert-snakeoil.key -out /etc/ssl/certs/ssl-cert-snakeoil.pem -subj "/C=AT/ST=Localhost/L$
+RUN openssl req -x509 -nodes -days 3650 -newkey rsa:2048 -keyout /etc/ssl/private/ssl-cert-snakeoil.key -out /etc/ssl/certs/ssl-cert-snakeoil.pem -subj "/C=AT/ST=Localhost/L=Localhost/O=TLS_SSL/OU=Localhost/CN=localhost"
 
 # Apache configuration
 RUN a2ensite default-ssl
