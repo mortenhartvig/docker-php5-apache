@@ -1,2 +1,2 @@
-# docker-php5-apache
+# docker-php-apache
 Generate that dockerfile for Prestashop testing!
