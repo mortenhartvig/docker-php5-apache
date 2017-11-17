@@ -17,7 +17,19 @@ RUN apt-get update \
                 unzip \
     && rm -rf /var/lib/apt/lists/* \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
-    && docker-php-ext-install iconv intl mcrypt opcache pdo mysqli pdo_mysql mbstring soap gd zip
+    && docker-php-ext-install \
+        iconv \
+        intl \
+        mcrypt \
+        opcache \
+        pdo \
+        mysqli \
+        pdo_mysql \
+        mbstring \
+        soap \
+        gd \
+        zip \
+        pcntl 
 
 RUN openssl req -x509 -nodes -days 3650 -newkey rsa:2048 -keyout /etc/ssl/private/ssl-cert-snakeoil.key -out /etc/ssl/certs/ssl-cert-snakeoil.pem -subj "/C=AT/ST$
 
