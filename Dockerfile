@@ -1,4 +1,4 @@
-FROM php:7.1.6-apache
+FROM php:7.1.11-apache
 
 MAINTAINER Morten Hartvig <hartvigmorten@gmail.com>
 
@@ -30,6 +30,21 @@ RUN apt-get update \
         gd \
         zip \
         pcntl 
+
+# Install Xdebug
+RUN curl -fsSL 'https://xdebug.org/files/xdebug-2.5.5.tgz' -o xdebug.tar.gz \
+    && mkdir -p xdebug \
+    && tar -xf xdebug.tar.gz -C xdebug --strip-components=1 \
+    && rm xdebug.tar.gz \
+    && ( \
+    	cd xdebug \
+    	&& phpize \
+    	&& ./configure --enable-xdebug \
+    	&& make -j$(nproc) \
+    	&& make install \
+    ) \
+    && rm -r xdebug \
+    && docker-php-ext-enable xdebug
 
 RUN openssl req -x509 -nodes -days 3650 -newkey rsa:2048 -keyout /etc/ssl/private/ssl-cert-snakeoil.key -out /etc/ssl/certs/ssl-cert-snakeoil.pem -subj "/C=AT/ST$
 
