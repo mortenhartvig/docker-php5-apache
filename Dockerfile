@@ -21,10 +21,17 @@ RUN apt-get update \
 
 RUN openssl req -x509 -nodes -days 3650 -newkey rsa:2048 -keyout /etc/ssl/private/ssl-cert-snakeoil.key -out /etc/ssl/certs/ssl-cert-snakeoil.pem -subj "/C=AT/ST=Localhost/L=Localhost/O=TLS_SSL/OU=Localhost/CN=localhost"
 
+# Install Mod Pagespeed
+RUN cd /tmp \
+    && curl -o /tmp/mod-pagespeed.deb https://dl-ssl.google.com/dl/linux/direct/mod-pagespeed-stable_current_amd64.$
+    && dpkg -i /tmp/mod-pagespeed.deb \
+    && apt-get -f install
+
 # Apache configuration
 RUN a2ensite default-ssl
 RUN a2enmod ssl
 RUN a2enmod rewrite
+RUN a2enmod expires
 
 # PHP configuration
 COPY config_files/php.ini /usr/local/etc/php/
